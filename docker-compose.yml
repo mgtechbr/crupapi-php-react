@@ -1,0 +1,52 @@
+version: "3.9"
+
+services:
+  # Serviço PHP com Laravel e Composer
+  php:
+    container_name: php_container
+    build: ./php
+    volumes:
+      - ./app/laravel:/var/www/html
+    ports:
+      - "8000:80"
+    depends_on:
+      - mysql
+    networks:
+      - app-network
+
+  # Serviço Node.js para React/React Native
+  node:
+    container_name: node_container
+    build:
+      context: .
+      dockerfile: ./node/Dockerfile
+    volumes:
+      - ./app/react-native:/usr/src/app
+    ports:
+      - "3000:3000"
+      - "19000:19000"  # Porta do React Native
+    networks:
+      - app-network
+
+  # Serviço MySQL
+  mysql:
+    container_name: mysql_container
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: laravel
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    volumes:
+      - db_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - app-network
+
+volumes:
+  db_data:
+
+networks:
+  app-network:
+    driver: bridge
