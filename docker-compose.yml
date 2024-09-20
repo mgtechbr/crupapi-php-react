@@ -21,7 +21,7 @@ services:
       context: .
       dockerfile: ./node/Dockerfile
     volumes:
-      - ./app/react-native:/usr/src/app
+      - ./app/react-native:/app/react-native
     ports:
       - "3000:3000"
       - "19000:19000"  # Porta do React Native

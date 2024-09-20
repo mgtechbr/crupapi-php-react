@@ -1,25 +1,20 @@
-FROM node:14
+FROM ubuntu:16.04
 
-# Instalação do JDK
-RUN apt-get update && apt-get install -y openjdk-11-jdk
+# Instalar dependências básicas
+RUN apt-get update && \
+    apt-get install -y curl && \
+    curl -fsSL https://deb.nodesource.com/setup_14.x | bash - && \
+    apt-get install -y nodejs && \
+    apt-get install -y git
 
-# Define a variável JAVA_HOME
-ENV JAVA_HOME /usr/lib/jvm/java-11-openjdk-amd64
-ENV PATH $JAVA_HOME/bin:$PATH
+# Copiar o código do app para o diretório correto
+COPY ./app/react-native /react-native/
 
-# Define o diretório de trabalho
-WORKDIR /usr/src/app
+# Definir o diretório de trabalho
+WORKDIR /react-native
 
-# Copia package.json e instala dependências
-COPY package*.json ./
-RUN npm install
+# Instalar as dependências do projeto
+RUN npm install && npm install -g expo-cli
 
-# Copia o restante do código
-COPY . .
-
-# Expõe as portas padrão do Node e do React Native
-EXPOSE 3000
-EXPOSE 19000
-
-# Comando para rodar o app
-CMD ["npm", "start"]
+# Comando para iniciar o app
+CMD [ "npm", "start" ]
