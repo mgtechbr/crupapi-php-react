@@ -24,7 +24,12 @@ services:
       - ./app/react-native:/app/react-native
     ports:
       - "3000:3000"
-      - "19000:19000"  # Porta do React Native
+      - "19000:19000"
+      - "19001:19001"
+      - "19002:19002"
+      - "19003:19003"
+      - "19006:19006"  # Porta do React Native
+      - "8081:8081"  # Porta do React Native
     networks:
       - app-network
 
