@@ -14,7 +14,8 @@
     "react-dom": "18.2.0",
     "react-native": "0.75.0",
     "react-native-web": "^0.19.10",
-    "@expo/ngrok": "^4.1.0"
+    "@expo/ngrok": "^4.1.0",
+    "@expo/metro-runtime": "~3.2.3"
   },
   "devDependencies": {
     "@babel/core": "^7.22.5"

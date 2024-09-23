@@ -39,15 +39,11 @@ ENV PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
 RUN npm install -g @expo/ngrok@^4.1.0
 
 # Criar diretório do app e configurar permissões
-RUN mkdir /opt/react_native_app
-WORKDIR /app/react_native_app
+WORKDIR /app/react-native
 
 # Instalar dependências do Node.js
 COPY ./app/react-native/package.json ./app/react-native/package-lock.json ./
 RUN npm install
-
-# Copiar o código do app para o container
-COPY ./app/react-native ./
 
 # Definir o ponto de entrada e comando para rodar o Expo
 ENTRYPOINT ["npm", "run"]
