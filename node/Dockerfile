@@ -44,7 +44,6 @@ WORKDIR /app/react-native
 COPY ./app/react-native/package.json ./app/react-native/package-lock.json ./
 RUN npm install
 
-
 # Definir o ponto de entrada e comando para rodar o Expo
 ENTRYPOINT ["npm", "run"]
 CMD ["start"]
