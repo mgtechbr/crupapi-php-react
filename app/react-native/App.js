@@ -1,22 +1,17 @@
-import { StatusBar } from 'expo-status-bar';
-import '@expo/metro-runtime';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import '@expo/metro-runtime';
+import { NavigationContainer } from '@react-navigation/native';
 
-export default function App() {
+import UserContextProvider from './src/contexts/UserContext'
+import MainStack from './src/stacks/MainStack';
+
+export default () => {
     return (
-        <View style={styles.container}>
-            <Text>Foi teste5</Text>
-            <StatusBar style="auto" />
-        </View>
+        <UserContextProvider>
+            <NavigationContainer>
+                <MainStack />
+            </NavigationContainer>
+        </UserContextProvider>
+
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: 'red',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-});
